@@ -1,5 +1,10 @@
 #include<stdio.h>
 #include"st_struct.h"
+/*
+to remove data from file we use cs_data function
+to add data to file we use ws_data function with student data as argument
+we can use rs_data function to send students data in student_data file to function that add them to array
+*/
 void cs_data()
 {
     fclose(fopen("student_data.txt", "w"));
