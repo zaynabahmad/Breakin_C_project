@@ -1,14 +1,10 @@
 #include<stdio.h>
-#include"st_struct.h"
-/*
-to remove data from file we use cs_data function
-to add data to file we use ws_data function with student data as argument
-we can use rs_data function to send students data in student_data file to function that add them to array
-*/
+#include"../../st_struct.h"
 void cs_data()
 {
     fclose(fopen("student_data.txt", "w"));
 }
+//we use ws_data function ro add student data to file
 void ws_data(stu p_st)
 {
     FILE *file;
@@ -25,6 +21,7 @@ void ws_data(stu p_st)
     }
     fclose(file);
 }
+//we can use rs_data function to send students data in student_data file to function that add them to array
 void rs_data()
 {
     FILE *file;
@@ -37,7 +34,7 @@ void rs_data()
     stu temp;
     char *s;
     char *a;
-    do
+    while(!feof(file))
     {
       int num=0;
       s = malloc(50 * sizeof(char));
@@ -55,6 +52,6 @@ void rs_data()
         return;
       }
       //function that add this student to array
-    }while(!feof(file));
+    }
      fclose(file);
 }
