@@ -22,7 +22,7 @@ void FileAccess_voidDeleteAllRec(void)
 }
 
 /*
-Use this function to add students to the database. 
+Use this function to add students to the database.Â 
 It takes student structure as argument.
 */
 
@@ -56,7 +56,7 @@ void FileAccess_voidWriteStudentRec(Student Arg_studentRecord)
 }
 
 /*
-Use this function to read all sensitive data from the database.
+Use this function to read all students data from the database.
 It takes a pointer to an array of students as an argument.
 return number of the student
 
@@ -123,7 +123,7 @@ int FileAccess_voidReadStudentRec(Student**Arg_Arr)
 }
 
 /*
-Use this function to read admin passwords from the database. 
+Use this function to read admin passwords from the database.Â 
 It returns the admin password as a string.
 */
 
