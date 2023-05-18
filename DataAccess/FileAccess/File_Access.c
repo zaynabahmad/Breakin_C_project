@@ -3,158 +3,153 @@
 #include "string.h"
 #include "../Student_struct.h"
 #include"../MemoryManagement/Memory_Management.h"
+/**
+ * @file File_Access.h
+ * @author Moamen eltony
+ * @brief This file contains functions that deal with data in DataBase.
+ * @version 0.1
+ * @date 2023-05-15
+ */
 
-/*
-*File_Access.h
-*Moamen eltony
-*This file contains functions that deal with data in DataBase.
-*Version 1.0
-*2023-05-15
-*/
-
-
-/*
-Use this function to delete records from the database.
-*/
-void FileAccess_voidDeleteAllRec(void)
+/**
+ *brief :Use this function to delete records from the database.
+ */
+void DFIL_vDeleteAllRec(void)
 {
 	fclose(fopen("DataAccess/FileAccess/Student_Data.csv", "w"));
 }
 
-/*
-Use this function to add students to the database. 
-It takes student structure as argument.
-*/
-
-void FileAccess_voidWriteStudentRec(Student Arg_studentRecord)
+ /**
+ *brief :Use this function to add students to the database. 
+ *@param cpy_sStudent:Student Data
+ */
+void DFIL_vWriteStudentRec(Student cpy_sStudent)
 {
-	FILE *Local_file;
-	Local_file = fopen("DataAccess/FileAccess/Student_Data.csv","a");
+	FILE *loc_ptr_file;
+	loc_ptr_file = fopen("DataAccess/FileAccess/Student_Data.csv","a");
 
-	if(Local_file == NULL)
+	if(loc_ptr_file == NULL)
 	{
 		printf("FileAccess_voidDeleteAllRec: Error opening file.\n");
 
 		return;
     }
 
-    fprintf(Local_file,
+    fprintf(loc_ptr_file,
 			"%s,%s,%.2f,%d,%d,%c\n",
-			Arg_studentRecord.name,
-			Arg_studentRecord.pass,
-			Arg_studentRecord.grade,
-			Arg_studentRecord.id,
-			Arg_studentRecord.age,
-			Arg_studentRecord.gender);
+			cpy_sStudent.name,
+			cpy_sStudent.pass,
+			cpy_sStudent.grade,
+			cpy_sStudent.id,
+			cpy_sStudent.age,
+			cpy_sStudent.gender);
 
-    if(ferror(Local_file))
+    if(ferror(loc_ptr_file))
     {
 		printf("FileAccess_voidDeleteAllRec: Error writing to file.\n");
     }
 
-    fclose(Local_file);
+    fclose(loc_ptr_file);
 }
 
-/*
-Use this function to read all sensitive data from the database.
-It takes a pointer to an array of students as an argument.
-return number of the student
-
-*/
-
-int FileAccess_voidReadStudentRec(Student**Arg_Arr)
+ /**
+ *brief :Use this function to read all Students data from the database.
+ *@param ptr_aStudent:pointer to Students array
+ *@return int:number of students
+ */
+int DFIL_nReadStudentRec(Student**ptr_aStudent)
 {
-    FILE *Local_file;
-    Local_file = fopen("DataAccess/FileAccess/Student_Data.csv", "r");
+    FILE *loc_ptr_file;
+    loc_ptr_file = fopen("DataAccess/FileAccess/Student_Data.csv", "r");
 
-    if (Local_file == NULL)
+    if (loc_ptr_file == NULL)
     {
 		printf("FileAccess_voidReadStudentRec: Error opening file.\n");
 
 		return 0;
     }
 
-    Student Local_studentTemp;
+    Student Loc_cpy_sStudentTemp;
 
-    char *Local_pcPass;
-	char *Local_pcName;
+    char *Loc_ptr_pPass;
+	char *Loc_ptr_pName;
 
-	int size=0;
+	int cpy_nSize=0;
 
-	while(!feof(Local_file))
+	while(!feof(loc_ptr_file))
     {
 		int num = 0;
 
-		Memory_Management_Allocate_SudentName(&Local_pcName);
-        Memory_Management_Allocate_SudentName(&Local_pcPass);
+		DMMN_vAllocateSudentName(&Loc_ptr_pName);
+        DMMN_vAllocateSudentName(&Loc_ptr_pPass);
 
-		num = fscanf(Local_file,
+		num = fscanf(loc_ptr_file,
 				   "%49[^,],%49[^,],%f,%d,%d,%c\n",
-				   Local_pcName,
-				   Local_pcPass,
-				   &Local_studentTemp.grade,
-				   &Local_studentTemp.id,
-				   &Local_studentTemp.age,
-				   &Local_studentTemp.gender);
+				   Loc_ptr_pName,
+				   Loc_ptr_pPass,
+				   &Loc_cpy_sStudentTemp.grade,
+				   &Loc_cpy_sStudentTemp.id,
+				   &Loc_cpy_sStudentTemp.age,
+				   &Loc_cpy_sStudentTemp.gender);
 
-		Memory_Management_Resize_SudentName(&Local_pcName);
-		Memory_Management_Resize_SudentName(&Local_pcPass);
+		DMMN_vResizeSudentName(&Loc_ptr_pName);
+		DMMN_vResizeSudentName(&Loc_ptr_pPass);
 
-		Local_studentTemp.name = Local_pcName;
-		Local_studentTemp.pass = Local_pcPass;
+		Loc_cpy_sStudentTemp.name = Loc_ptr_pName;
+		Loc_cpy_sStudentTemp.pass = Loc_ptr_pPass;
 
-		Local_pcName = NULL;
-		Local_pcPass = NULL;
+		Loc_ptr_pName = NULL;
+		Loc_ptr_pPass = NULL;
 
-		if((num != 6) && (!feof(Local_file)))
+		if((num != 6) && (!feof(loc_ptr_file)))
 		{
 			printf("FileAccess_voidReadStudentRec: File format incorrect.\n");
 
 			return 0;
 		}
 
-        Memory_Management_Allocate_Student_Memory(Arg_Arr,size);
-		*(*(Arg_Arr)+size)=Local_studentTemp;
-		size++;
+        DMMN_vAllocateStudentMemory(ptr_aStudent,cpy_nSize);
+		*(*(ptr_aStudent)+cpy_nSize)=Loc_cpy_sStudentTemp;
+		cpy_nSize++;
 
     }
-    fclose(Local_file);
-    return size;
+    fclose(loc_ptr_file);
+    return cpy_nSize;
 }
 
-/*
-Use this function to read admin passwords from the database. 
-It returns the admin password as a string.
-*/
-
-char* FileAccess_voidReadAdminPass(void)
+ /**
+ *brief :Use this function to read admin passwords from the database.
+ *@return char*:char pointer to admin password
+ */
+char* DFIL_pReadAdminPass(void)
 {
-    FILE *Local_file;
-    Local_file = fopen("DataAccess/FileAccess/Admin_Password.csv", "r");
-    char *Local_Admin_Pass=malloc(50*sizeof(char));
-    fscanf(Local_file,"%49[^,]",Local_Admin_Pass);
-    Local_Admin_Pass=(char*)realloc(Local_Admin_Pass,strlen(Local_Admin_Pass)+1);
-    if(ferror(Local_file))
+    FILE *loc_ptr_file;
+    loc_ptr_file = fopen("DataAccess/FileAccess/Admin_Password.csv", "r");
+    char *Loc_cpy_pAdminPass=malloc(50*sizeof(char));
+    fscanf(loc_ptr_file,"%49[^,]",Loc_cpy_pAdminPass);
+    Loc_cpy_pAdminPass=(char*)realloc(Loc_cpy_pAdminPass,strlen(Loc_cpy_pAdminPass)+1);
+    if(ferror(loc_ptr_file))
     {
 		printf("FileAccess_voidReadAdminPass: Error writing to file.\n");
     }
-    fclose(Local_file);
-    return Local_Admin_Pass;
+    fclose(loc_ptr_file);
+    return Loc_cpy_pAdminPass;
 }
-/*
-Use this function to update the admin record.
-It takes a char pointer as an argument.
-*/
-void FileAccess_voidWriteAdminPass(char *Arg_AdminPass)
+
+ /**
+ *brief :Use this function to update the admin record.
+ *@param cpy_pAdminPass:Admin password as string
+ */
+void DFIL_vWriteAdminPass(char *cpy_pAdminPass)
 {
-    FILE *Local_file;
-    Local_file = fopen("DataAccess/FileAccess/Admin_Password.csv", "w");
-    if(Local_file == NULL)
+    FILE *loc_ptr_file;
+    loc_ptr_file = fopen("DataAccess/FileAccess/Admin_Password.csv", "w");
+    if(loc_ptr_file == NULL)
 	{
 		printf("FileAccess_voidDeleteAllRec: Error opening file.\n");
 
 		return;
     }
-     fprintf(Local_file,"%s\n",Arg_AdminPass);
-     fclose(Local_file);
+     fprintf(loc_ptr_file,"%s\n",cpy_pAdminPass);
+     fclose(loc_ptr_file);
 }

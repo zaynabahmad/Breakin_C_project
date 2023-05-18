@@ -2,97 +2,108 @@
 #include<stdlib.h>
 #include"../Student_Struct.h"
 #include"../MemoryManagement/Memory_Management.h"
+/**
+ * @file Data_Management.h
+ * @author Moamen eltony
+ * @brief This file contains functions that deal with student data in a dynamic array.
+ * @version 0.1
+ * @date 2023-05-15
+ */
 
-/*
-*Data_Management.h
-*Moamen eltony
-*This file contains functions that deal with student data in a dynamic array.
-*Version 1.0
-*2023-05-15
-*/
-
-/*
-Use this function to add students.
-It takes a pointer to an array of students, the number of students, and the new student as arguments.
-*/
-int Data_Management_AddStudent(Student*Arg_Arr[],int Arg_n,Student Arg_NewStudent)
+ /**
+ *brief :Use this function to add students.
+ *@param ptr_aStudent:pointer to Students array
+ *@param cpy_nNum:Number of students in array
+ *@param cpy_sNewStudent:New Student
+ *@return int:new number of students
+ */
+int DDMN_nAddStudent(Student*ptr_aStudent[],int cpy_nNum,Student cpy_sNewStudent)
 {
-    Memory_Management_Allocate_Student_Memory(Arg_Arr,Arg_n);
-    *(*(Arg_Arr)+Arg_n)=Arg_NewStudent;
-    Arg_n++;
-    return Arg_n;
+    DMMN_vAllocateStudentMemory(ptr_aStudent,cpy_nNum);
+    *(*(ptr_aStudent)+cpy_nNum)=cpy_sNewStudent;
+    cpy_nNum++;
+    return cpy_nNum;
 }
 
-/*
-Use this function to edit a student's grade.
-It takes a pointer to an array of students, the number of students, and the new grade as arguments.
-*/
-void Data_Management_EditStudentGrade(Student*Arg_Arr[],float Arg_Grade,int Arg_id,int Arg_n)
+ /**
+ *brief :Use this function to edit a student's grade.
+ *@param ptr_aStudent:pointer to Students array
+ *@param cpy_nNum:Number of students in array
+ *@param cpy_nId:ID for a wanted student
+ *@param cpy_fGrade:New grade
+ */
+void DDMN_vEditStudentGrade(Student*ptr_aStudent[],float cpy_fGrade,int cpy_nId,int cpy_nNum)
 {
-    for(int i=0;i<Arg_n;i++)
+    for(int i=0;i<cpy_nNum;i++)
     {
-        if((*Arg_Arr)[i].id==Arg_id)
+        if((*ptr_aStudent)[i].id==cpy_nId)
         {
-            (*Arg_Arr)[i].grade=Arg_Grade;
+            (*ptr_aStudent)[i].grade=cpy_fGrade;
             return;
         }
     }
     printf("Data_Management_EditStudentGrade:Wrong id\n");
 }
 
-/*
-Use this function to delete students.
-It takes a pointer to an array of students, the number of students, and the ID of the student as arguments.
-*/
-int Data_Management_DeleteStudent(Student*Arg_Arr[],int Arg_id,int Arg_n)
+ /**
+ *brief :Use this function to delete students.
+ *@param ptr_aStudent:pointer to Students array
+ *@param cpy_nNum:Number of students in array
+ *@param cpy_nId:ID for a wanted student
+ *@return int:new number of students
+ */
+int DDMN_nDeleteStudent(Student*ptr_aStudent[],int cpy_nId,int cpy_nNum)
 {
-    Student*Local_NewArr;
-    Memory_Management_Delete_Student_Memory(&Local_NewArr,Arg_n);
+    Student*loc_ptr_sNewArr;
+    DMMN_vDeleteStudentMemory(&loc_ptr_sNewArr,cpy_nNum);
     int i=0;
-    for(int j=0;j<Arg_n;j++)
+    for(int j=0;j<cpy_nNum;j++)
     {
-        if((*Arg_Arr)[j].id==Arg_id)
+        if((*ptr_aStudent)[j].id==cpy_nId)
         {
             j++;
         }
-        if(i==Arg_n-1)
+        if(i==cpy_nNum-1)
         {
             break;
         }
-        Local_NewArr[i]=(*Arg_Arr)[j];
+        loc_ptr_sNewArr[i]=(*ptr_aStudent)[j];
         i++;
     }
-    free(*Arg_Arr);
-    *Arg_Arr=Local_NewArr;
-    Local_NewArr=NULL;
-    return Arg_n-1;
+    free(*ptr_aStudent);
+    *ptr_aStudent=loc_ptr_sNewArr;
+    loc_ptr_sNewArr=NULL;
+    return cpy_nNum-1;
 }
 
-/*
-Use this function to print a student's grade.
-It takes a pointer to an array of students, the number of students, and the ID of the student as arguments.
-*/
-void Data_Management_ViewStudentRecord(Student*Arg_Arr[],int Arg_id,int Arg_n)
+ /**
+ *brief :Use this function to print a student's grade.
+ *@param ptr_aStudent:pointer to Students array
+ *@param cpy_nNum:Number of students in array
+ *@param cpy_nId:ID for a wanted student
+ */
+void DDMN_vViewStudentRecord(Student*ptr_aStudent[],int cpy_nId,int cpy_nNum)
 {
-    for(int i=0;i<Arg_n;i++)
+    for(int i=0;i<cpy_nNum;i++)
     {
-        if((*Arg_Arr)[i].id==Arg_id)
+        if((*ptr_aStudent)[i].id==cpy_nId)
         {
-            printf("%.2f\n",(*Arg_Arr)[i].grade);
+            printf("%.2f\n",(*ptr_aStudent)[i].grade);
             return;
         }
     }
     printf("Data_Management_ViewStudentRecord:Wrong id\n");
 }
 
-/*
-Use this function to print all students grades.
-It takes a pointer to an array of students, the number of students, and the ID of the student as arguments.
-*/
-void Data_Management_ViewAllRecord(Student*Arg_Arr[],int Arg_n)
+ /**
+ *brief :Use this function to print a student's grade.
+ *@param ptr_aStudent:pointer to Students array
+ *@param cpy_nNum:Number of students in array
+ */
+void DDMN_vViewAllRecord(Student*ptr_aStudent[],int cpy_nNum)
 {
-    for(int i=0;i<Arg_n;i++)
+    for(int i=0;i<cpy_nNum;i++)
     {
-        printf("%.2f\n",(*Arg_Arr)[i].grade);
+        printf("%.2f\n",(*ptr_aStudent)[i].grade);
     }
 }
