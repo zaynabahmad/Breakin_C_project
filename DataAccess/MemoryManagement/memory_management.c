@@ -43,7 +43,7 @@ void DMMN_vAllocateStudentMemory(Student *ptr_aStudents[],int cpy_nNum)
  *@param ptr_aStudents:pointer to Students array
  *@param cpy_nNum:number of students
  */
-void DMMN_vDeleteStudentMemory(Student**ptr_aStudents,int cpy_nNum)
+void DMMN_vDeleteStudentMemory(Student*ptr_aStudents[],int cpy_nNum)
 {
     *ptr_aStudents=(Student*)malloc((cpy_nNum-1)*sizeof(Student));
 }
