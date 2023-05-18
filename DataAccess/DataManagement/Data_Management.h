@@ -1,6 +1,6 @@
 #ifndef Data_Management
 #define Data_Management
-#include"../Student_Struct.h"
+#include"../student_struct.h"
 /**
  * @file Data_Management.h
  * @author Moamen eltony

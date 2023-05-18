@@ -1,6 +1,6 @@
 #ifndef Memory_Management
 #define Memory_Management
-#include "../Student_struct.h"
+#include "../student_struct.h"
 /**
  * @file Memory_Management.h
  * @author Moamen eltony

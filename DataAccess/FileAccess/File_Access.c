@@ -1,8 +1,8 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "string.h"
-#include "../Student_struct.h"
-#include"../MemoryManagement/Memory_Management.h"
+#include "../student_struct.h"
+#include"../MemoryManagement/memory_management.h"
 /**
  * @file File_Access.h
  * @author Moamen eltony

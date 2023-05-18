@@ -1,6 +1,6 @@
 #ifndef FILE_ACCESS
 #define FILE_ACCESS
-#include"../Student_Struct.h"
+#include"../student_struct.h"
 
 /**
  * @file File_Access.h

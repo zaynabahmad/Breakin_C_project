@@ -1,7 +1,7 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "string.h"
-#include "../Student_struct.h"
+#include "../student_struct.h"
 /**
  * @file Memory_Management.h
  * @author Moamen eltony
@@ -25,7 +25,7 @@ void DMMN_vAllocateSudentName(char **ptr_aName)
  */
 void DMMN_vResizeSudentName(char **ptr_aName)
 {
-    *ptr_aName=(char*)realloc(*Arg_P,strlen(*Arg_P)+1);
+    *ptr_aName=(char*)realloc(*ptr_aName,strlen(*ptr_aName)+1);
 }
 
 /**

@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include"../Student_Struct.h"
-#include"../MemoryManagement/Memory_Management.h"
+#include"../student_struct.h"
+#include"../MemoryManagement/memory_management.h"
 /**
  * @file Data_Management.h
  * @author Moamen eltony
