@@ -1,8 +1,8 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include"../../DataAccess/student_struct.h"
-#include"../../DataAccess/MemoryManagement/Memory_Management.h"
-#include"../../DataAccess/DataManagement/Data_Management.h"
+#include"../../DataAccess/MemoryManagement/memory_management.h"
+#include"../../DataAccess/DataManagement/data_management.h"
 
 /**
  * @file student.h
