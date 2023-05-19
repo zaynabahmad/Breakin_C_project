@@ -12,4 +12,11 @@ typedef struct student
 }
 Student;
 
+typedef struct admin
+{
+    char *username;
+    char *pass;
+}
+Admin;
+
 #endif

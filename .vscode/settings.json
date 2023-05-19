@@ -1,5 +1,8 @@
 {
     "files.associations": {
-        "error_handling.h": "c"
+        "error_handling.h": "c",
+        "io_interface.h": "c",
+        "input_interface.h": "c",
+        "output_interface.h": "c"
     }
 }
