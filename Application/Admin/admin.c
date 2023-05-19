@@ -8,7 +8,7 @@
 /**
  * @file admin.h
  * @author Moamen eltony
- * @brief This file contains functions that deal with student mode.
+ * @brief This file contains functions that deal with admin mode.
  * @version 0.1
  * @date 2023-05-18
  */
