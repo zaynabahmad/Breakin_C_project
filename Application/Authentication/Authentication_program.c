@@ -60,22 +60,57 @@ void Authent_ValidateAdminData(char *Arg_Password, int *Arg_LoginState)
 
 int Authent_ValidateStudentData(Student *Arg_StudentArr[], int Arg_ID, char *Arg_Password, int Arg_StudentsNum)
 {
-    // char *Loc_Name;
-    // char *Loc_Password;
+    int Local_Iterator = 0;
+    char Local_Temp;
+    int Local_PasswordSize = 0;
+    int Local_InputedPasswordSize = 0;
+    int Local_State = 1;
+    int Local_InputedIDNum;
 
-    // DMMN_vAllocateSudentName(&Loc_Name);
-    // DMMN_vAllocateSudentName(&Loc_Password);
-
-    int Local_Iterator;
     for(Local_Iterator = 0; Local_Iterator < Arg_StudentsNum; Local_Iterator++)
     {
-        if(((*Arg_StudentArr)[Local_Iterator].id == Arg_ID) && ((strcmp((*Arg_StudentArr)[Local_Iterator].pass, Arg_ID) == 1))) 
+        if((*Arg_StudentArr)[Local_Iterator].id == Arg_ID) 
         {
-            return 1;   
+            Local_InputedIDNum = Local_Iterator;
+            /*Find the length of the password*/
+            while(1)
+            {
+                Local_Temp = (*Arg_StudentArr)[Local_Iterator].pass[Local_PasswordSize];
+                if(Local_Temp == '\0')
+                {
+                    break;
+                }
+                Local_PasswordSize++;
+            }
+            /*Find the length of the inputed password*/
+            while(1)
+            {
+                Local_Temp = Arg_Password[Local_InputedPasswordSize];
+                if(Local_Temp == '\0')
+                {
+                    break;
+                }
+                Local_InputedPasswordSize++;
+            }
+
+            /*Check for identically*/
+            if(Local_InputedPasswordSize != Local_PasswordSize)
+            {
+                Local_State = 0;
+            }
+            else
+            {
+                for(Local_Iterator = 0; Local_Iterator < Local_InputedPasswordSize; Local_Iterator++)
+                {
+                    if((*Arg_StudentArr)[Local_InputedIDNum].pass[Local_Iterator] != Arg_Password[Local_Iterator])
+                    {
+                        Local_State = 0;
+                        break;
+                    }
+                }
+            }
         }
     }
     
-    return 0;
-    
-
+    return Local_State;
 }
