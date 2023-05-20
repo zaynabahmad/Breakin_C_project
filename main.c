@@ -11,108 +11,116 @@
 #include"UserInterface/IO/Output_interface.h"
 #include"UserInterface/Menu/Menu_interface.h"
 #include"Application/Authentication/Authentication_interface.h"
+
 int main()
 {
+    /*Open the file*/
     Student *loc_sArr;
     int loc_nNum=0;
     loc_sArr=(Student*)malloc(1*sizeof(Student));
     loc_nNum=DFIL_nReadStudentRec(&loc_sArr);
     char **Local_MenusPtr = NULL;
 
-    /*Character to carry the user choice*/
-    char Local_ChoiceIndicator;
+    /*integer to carry the user choice*/
+    int Local_ChoiceIndicator;
 
-    /*Char to validate the input*/
-    char Local_ChoiceIterator = 0;
+    /*integer to validate the input*/
+    int Local_ChoiceIterator = 0;
 
-    /*Char to carry the login state*/
-    char Local_LoginState = 0;
+    /*integer to carry the login state*/
+    int Local_LoginState = 0;
 
-    /*Get the main list*/
-    Menu_GetList(MAIN_LIST, &Local_MenusPtr);
-    Input_ScanMenuChoice(Local_MenusPtr, MAIN_LIST_ITEMS, &Local_ChoiceIndicator);
-    if(Local_ChoiceIndicator == 1)
+    /*integer to still in the loop*/
+    int Local_ListLoop;
+
+    while(1)
     {
-        Input_ScanLoginData(INPUT_ADMIN_TYPE, &Local_LoginState);
+        /*Update the list loop flag*/
+        Local_ListLoop = 1;
 
-        if(Local_LoginState == 1)
+        /*Get the main list*/
+        Menu_GetList(MAIN_LIST, &Local_MenusPtr);
+        Input_ScanMenuChoice(Local_MenusPtr, MAIN_LIST_ITEMS, &Local_ChoiceIndicator);
+
+        if(Local_ChoiceIndicator == 1)
         {
-            Menu_GetList(ADMIN_LIST, &Local_MenusPtr);
-            int loc_nAdminBool=1;
-            while(loc_nAdminBool)
+            Input_ScanLoginData(INPUT_ADMIN_TYPE, &Local_LoginState);
+
+            if(Local_LoginState == 1)
             {
-            printf("1 To add student record\n");
-            printf( "2 To remove student record press\n");
-            printf("3 To view student record\n");
-            printf("4 To view all records\n");
-            printf("5 To edit admin password\n");
-            printf("6 To edit student grade\n");
-            int n=0;
-            scanf("%d",&n);
-            switch(n)
-            {
-            case 1:
-                AADM_vAddStudent(&loc_sArr,&loc_nNum);
-                break;
-            case 2:
-                AADM_vRemoveStudent(&loc_sArr,&loc_nNum);
-                break;
-            case 3:
-                AADM_vViewStudent(&loc_sArr,loc_nNum);
-                break;
-            case 4:
-                AADM_vViewAllStudent(&loc_sArr,loc_nNum);
-                break;
-            case 5:
-                AADM_vEditAdminPass();
-                break;
-            case 6:
-                AADM_vEditStudentGrade(&loc_sArr,loc_nNum);
-                break;
-            case 7:
-                loc_nAdminBool=0;
-                break;
-            default:
-                printf("Wrong Number\n");
-                break;
-            }
+                Menu_GetList(ADMIN_LIST, &Local_MenusPtr);
+                while(Local_ListLoop)
+                {
+                    Input_ScanMenuChoice(Local_MenusPtr, ADMIN_LIST_ITEMS, &Local_ChoiceIndicator);
+                    switch(Local_ChoiceIndicator)
+                    {
+                    case 1:
+                        AADM_vAddStudent(&loc_sArr,&loc_nNum);
+                        break;
+                    case 2:
+                        AADM_vRemoveStudent(&loc_sArr,&loc_nNum);
+                        break;
+                    case 3:
+                        AADM_vViewStudent(&loc_sArr,loc_nNum);
+                        break;
+                    case 4:
+                        AADM_vViewAllStudent(&loc_sArr,loc_nNum);
+                        break;
+                    case 5:
+                        AADM_vEditAdminPass();
+                        break;
+                    case 6:
+                        AADM_vEditStudentGrade(&loc_sArr,loc_nNum);
+                        break;
+                    case 7:
+                        Local_ListLoop = 0;
+                        break;
+                    default:
+                        printf("Wrong number\n");
+                        break;
+                    }
+                }
             }
         }
-    }
-    else if(Local_ChoiceIndicator == 2)
-    {
-        Input_ScanLoginData(INPUT_STUDENT_TYPE, &Local_LoginState);
-
-        if(Local_LoginState == 1)
+        else if(Local_ChoiceIndicator == 2)
         {
-            Menu_GetList(STUDENT_LIST, &Local_MenusPtr);
-            Input_ScanMenuChoice(Local_MenusPtr, STUDENT_LIST_ITEMS, &Local_ChoiceIndicator);
-            int loc_nStudentBool=1;
-            while(loc_nStudentBool)
-            {
-            Input_ScanMenuChoice(Local_MenusPtr, STUDENT_LIST_ITEMS, &Local_ChoiceIndicator);
-            switch(Local_ChoiceIndicator)
-            {
-            case 1:
-                ASTU_vViewRecord(&loc_sArr,loc_nNum);
-                break;
-            case 2:
-                ASTU_vEditPass(&loc_sArr,loc_nNum);
-                break;
-            case 3:
-                ASTU_vEditName(&loc_sArr,loc_nNum);
-                break;
-            case 4:
-                loc_nStudentBool=0;
-                break;
-            default:
-                printf("Wrong number\n");
-                break;
+            Input_ScanStudentLoginData(&loc_sArr, loc_nNum, &Local_LoginState);
 
-            }
+            if(Local_LoginState == 1)
+            {
+                Menu_GetList(STUDENT_LIST, &Local_MenusPtr);
+                while(Local_ListLoop)
+                {
+                    Input_ScanMenuChoice(Local_MenusPtr, STUDENT_LIST_ITEMS, &Local_ChoiceIndicator);
+                    switch(Local_ChoiceIndicator)
+                    {
+                    case 1:
+                        ASTU_vViewRecord(&loc_sArr,loc_nNum);
+                        break;
+                    case 2:
+                        ASTU_vEditPass(&loc_sArr,loc_nNum);
+                        break;
+                    case 3:
+                        ASTU_vEditName(&loc_sArr,loc_nNum);
+                        break;
+                    case 4: 
+                        Local_ListLoop = 0;
+                        break;
+                    default:
+                        printf("Wrong number\n");
+                        break;
+                    }
+                }
             }
         }
+        else if(Local_ChoiceIndicator == 3)
+        {
+            break;
+        }
+        
     }
+
+    /*Close the file and save the new data*/
     DFIL_vDeleteAllRec();
     for(int i=0;i<loc_nNum;i++)
     {
@@ -122,5 +130,6 @@ int main()
         loc_sArr[i].name=NULL;
         loc_sArr[i].pass=NULL;
     }
+
     return 0;
 }
