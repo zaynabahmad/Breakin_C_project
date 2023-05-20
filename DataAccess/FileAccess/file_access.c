@@ -111,7 +111,6 @@ int DFIL_nReadStudentRec(Student**ptr_aStudent)
         DMMN_vAllocateStudentMemory(ptr_aStudent,cpy_nSize);
 		*(*(ptr_aStudent)+cpy_nSize)=Loc_cpy_sStudentTemp;
 		cpy_nSize++;
-
     }
     fclose(loc_ptr_file);
     return cpy_nSize;

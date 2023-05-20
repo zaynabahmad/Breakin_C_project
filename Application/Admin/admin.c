@@ -8,19 +8,15 @@
 /**
  * @file admin.h
  * @author Moamen eltony
- * @brief This file contains functions that deal with admin mode.
+ * @brief This file contains functions that deal with student mode.
  * @version 0.1
  * @date 2023-05-18
  */
 
-/**
- *brief :Use this function to add student to dynamic array.
- *@param ptr_aStudent:pointer to Students array
- *@param ptr_nNum:Number of students in array
- */
 void AADM_vAddStudent(Student *ptr_aStudents[],int *ptr_nNum)
 {
     Student loc_sTemp;
+    int loc_nBool=0;
     int loc_nGender;
     char*loc_pName;
     char*loc_pPass;
@@ -38,10 +34,51 @@ void AADM_vAddStudent(Student *ptr_aStudents[],int *ptr_nNum)
     loc_pPass=NULL;
     printf("Enter student id\n");
     scanf("%d",&loc_sTemp.id);
+    for(int i=0;i<*ptr_nNum;i++)
+    {
+        if((*ptr_aStudents)[i].id==loc_sTemp.id)
+        {
+            loc_nBool=1;
+            break;
+        }
+    }
+    while(loc_nBool)
+    {
+        printf("Id Already Exist\n");
+        printf("Enter Student id or enter 1 to exit\n");
+        scanf("%d",&loc_sTemp.id);
+        if(loc_sTemp.id==1)
+        {
+            free(loc_sTemp.name);
+            free(loc_sTemp.pass);
+            return;
+        }
+        loc_nBool=0;
+        for(int i=0;i<*ptr_nNum;i++)
+        {
+            if((*ptr_aStudents)[i].id==loc_sTemp.id)
+            {
+                loc_nBool=1;
+                break;
+            }
+        }
+    }
     printf("Enter student age\n");
     scanf("%d",&loc_sTemp.age);
     printf("Enter student grade\n");
     scanf("%f",&loc_sTemp.grade);
+    while(loc_sTemp.grade>100||loc_sTemp.grade<0)
+    {
+        printf("Grade must be between 0 and 100\n");
+        printf("Enter new Grade or Enter -1 for exit\n");
+        scanf("%f",&loc_sTemp.grade);
+        if(loc_sTemp.grade==-1)
+        {
+            free(loc_sTemp.name);
+            free(loc_sTemp.pass);
+            return;
+        }
+    }
     while(1)
     {
         printf("Enter 1 for male\nEnter 2 for Female\n");
@@ -73,45 +110,81 @@ void AADM_vAddStudent(Student *ptr_aStudents[],int *ptr_nNum)
     *ptr_nNum=DDMN_nAddStudent(ptr_aStudents,*ptr_nNum,loc_sTemp);
 }
 
-/**
- *brief :Use this function to remove student from dynamic array.
- *@param ptr_aStudent:pointer to Students array
- *@param ptr_nNum:Number of students in array
- */
 void AADM_vRemoveStudent(Student *ptr_aStudents[],int *ptr_nNum)
 {
     int loc_nId;
+    int loc_nBool=0;
     printf("Enter student id\n");
     scanf("%d",&loc_nId);
+    for(int i=0;i<*ptr_nNum;i++)
+    {
+        if((*ptr_aStudents)[i].id==loc_nId)
+        {
+            loc_nBool=1;
+            break;
+        }
+    }
+    while(loc_nBool==0)
+    {
+        printf("ID dosen't exist\n");
+        printf("Enter id or Enter 1 to exit\n");
+        scanf("%d",loc_nId);
+        if(loc_nId==1)
+        {
+            return;
+        }
+        for(int i=0;i<*ptr_nNum;i++)
+        {
+            if((*ptr_aStudents)[i].id==loc_nId)
+            {
+                loc_nBool=1;
+                break;
+            }
+        }
+    }
     *ptr_nNum=DDMN_nDeleteStudent(ptr_aStudents,loc_nId,*ptr_nNum);
 }
 
-/**
- *brief :Use this function to view student record.
- *@param ptr_aStudent:pointer to Students array
- *@param cpy_nNum:Number of students in array
- */
 void AADM_vViewStudent(Student *ptr_aStudents[],int cpy_nNum)
 {
     int loc_nId;
+    int loc_nBool=0;
     printf("Enter student id\n");
     scanf("%d",&loc_nId);
+    for(int i=0;i<cpy_nNum;i++)
+    {
+        if((*ptr_aStudents)[i].id==loc_nId)
+        {
+            loc_nBool=1;
+            break;
+        }
+    }
+    while(loc_nBool==0)
+    {
+        printf("ID dosen't exist\n");
+        printf("Enter id or Enter 1 to exit\n");
+        scanf("%d",loc_nId);
+        if(loc_nId==1)
+        {
+            return;
+        }
+        for(int i=0;i<cpy_nNum;i++)
+        {
+            if((*ptr_aStudents)[i].id==loc_nId)
+            {
+                loc_nBool=1;
+                break;
+            }
+        }
+    }
     DDMN_vViewStudentRecord(ptr_aStudents,loc_nId,loc_nId);
 }
 
-/**
- *brief :Use this function to view all students record.
- *@param ptr_aStudent:pointer to Students array
- *@param cpy_nNum:Number of students in array
- */
 void AADM_vViewAllStudent(Student *ptr_aStudents[],int cpy_nNum)
 {
     DDMN_vViewAllRecord(ptr_aStudents,cpy_nNum);
 }
 
-/**
- *brief :Use this function to Edit Admin pass.
- */
 void AADM_vEditAdminPass()
 {
     char*loc_pPass;
@@ -121,11 +194,6 @@ void AADM_vEditAdminPass()
     DFIL_vWriteAdminPass(loc_pPass);
 }
 
-/**
- *brief :Use this function to edit student grade.
- *@param ptr_aStudent:pointer to Students array
- *@param cpy_nNum:Number of students in array
- */
 void AADM_vEditStudentGrade(Student *ptr_aStudents[],int cpy_nNum)
 {
     int loc_nId;
