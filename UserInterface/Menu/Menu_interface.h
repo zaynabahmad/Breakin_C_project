@@ -1,23 +1,26 @@
 #ifndef MENU_INTERFACE_
 #define MENU_INTERFACE_
 
-#define MAIN_LIST_ITEMS     2
-#define ADMIN_LIST_ITEMS    6
-#define STUDENT_LIST_ITEMS  3
+#define MAIN_LIST_ITEMS     3
+#define ADMIN_LIST_ITEMS    7
+#define STUDENT_LIST_ITEMS  4
 
 #define MAIN_LIST_ARR       {"Admin Mode",\
-                            "Student Mode"}
+                            "Student Mode",\
+                            "Exit"}
 
 #define ADMIN_LIST_ARR      {"To add student record",\
                             "To remove student record press",\
                             "To view student record",\
                             "To view all records",\
                             "To edit admin password",\
-                            "To edit student grade"}
+                            "To edit student grade",\
+                            "To go to the main menu"}
 
 #define STUDENT_LIST_ARR    {"To view your record",\
                             "To edit your password",\
-                            "To edit your name"}
+                            "To edit your name",\
+                            "To go to the main menu"}
 
 typedef enum
 {
