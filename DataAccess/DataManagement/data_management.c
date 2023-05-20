@@ -88,7 +88,7 @@ void DDMN_vViewStudentRecord(Student*ptr_aStudent[],int cpy_nId,int cpy_nNum)
     {
         if((*ptr_aStudent)[i].id==cpy_nId)
         {
-            printf("%.2f\n",(*ptr_aStudent)[i].grade);
+            printf("%s %s %d %d %.2f %c\n",(*ptr_aStudent)[i].name,(*ptr_aStudent)[i].pass,(*ptr_aStudent)[i].id,(*ptr_aStudent)[i].age,(*ptr_aStudent)[i].grade,(*ptr_aStudent)[i].gender);
             return;
         }
     }
@@ -104,6 +104,6 @@ void DDMN_vViewAllRecord(Student*ptr_aStudent[],int cpy_nNum)
 {
     for(int i=0;i<cpy_nNum;i++)
     {
-        printf("%.2f\n",(*ptr_aStudent)[i].grade);
+        printf("%s %s %d %d %.2f %c\n",(*ptr_aStudent)[i].name,(*ptr_aStudent)[i].pass,(*ptr_aStudent)[i].id,(*ptr_aStudent)[i].age,(*ptr_aStudent)[i].grade,(*ptr_aStudent)[i].gender);
     }
 }

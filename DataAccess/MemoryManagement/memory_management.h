@@ -14,6 +14,6 @@ void DMMN_vResizeSudentName(char **ptr_aName);
 
 void DMMN_vAllocateStudentMemory(Student *ptr_aStudents[],int cpy_nNum);
 
-void DMMN_vDeleteStudentMemory(Student**ptr_aStudents[],int cpy_nNum);
+void DMMN_vDeleteStudentMemory(Student*ptr_aStudents[],int cpy_nNum);
 
 #endif

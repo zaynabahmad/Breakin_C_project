@@ -16,7 +16,7 @@
  */
 void DFIL_vDeleteAllRec(void)
 {
-	fclose(fopen("DataAccess/FileAccess/Student_Data.csv", "w"));
+	fclose(fopen("DataAccess/FileAccess/student_data.csv", "w"));
 }
 
  /**
@@ -26,7 +26,7 @@ void DFIL_vDeleteAllRec(void)
 void DFIL_vWriteStudentRec(Student cpy_sStudent)
 {
 	FILE *loc_ptr_file;
-	loc_ptr_file = fopen("DataAccess/FileAccess/Student_Data.csv","a");
+	loc_ptr_file = fopen("DataAccess/FileAccess/student_data.csv","a");
 
 	if(loc_ptr_file == NULL)
 	{
@@ -60,7 +60,7 @@ void DFIL_vWriteStudentRec(Student cpy_sStudent)
 int DFIL_nReadStudentRec(Student**ptr_aStudent)
 {
     FILE *loc_ptr_file;
-    loc_ptr_file = fopen("DataAccess/FileAccess/Student_Data.csv", "r");
+    loc_ptr_file = fopen("DataAccess/FileAccess/student_data.csv", "r");
 
     if (loc_ptr_file == NULL)
     {
@@ -111,7 +111,6 @@ int DFIL_nReadStudentRec(Student**ptr_aStudent)
         DMMN_vAllocateStudentMemory(ptr_aStudent,cpy_nSize);
 		*(*(ptr_aStudent)+cpy_nSize)=Loc_cpy_sStudentTemp;
 		cpy_nSize++;
-
     }
     fclose(loc_ptr_file);
     return cpy_nSize;
@@ -124,7 +123,7 @@ int DFIL_nReadStudentRec(Student**ptr_aStudent)
 char* DFIL_pReadAdminPass(void)
 {
     FILE *loc_ptr_file;
-    loc_ptr_file = fopen("DataAccess/FileAccess/Admin_Password.csv", "r");
+    loc_ptr_file = fopen("DataAccess/FileAccess/admin_password.csv", "r");
     char *Loc_cpy_pAdminPass=malloc(50*sizeof(char));
     fscanf(loc_ptr_file,"%49[^,]",Loc_cpy_pAdminPass);
     Loc_cpy_pAdminPass=(char*)realloc(Loc_cpy_pAdminPass,strlen(Loc_cpy_pAdminPass)+1);
@@ -143,7 +142,7 @@ char* DFIL_pReadAdminPass(void)
 void DFIL_vWriteAdminPass(char *cpy_pAdminPass)
 {
     FILE *loc_ptr_file;
-    loc_ptr_file = fopen("DataAccess/FileAccess/Admin_Password.csv", "w");
+    loc_ptr_file = fopen("DataAccess/FileAccess/admin_password.csv", "w");
     if(loc_ptr_file == NULL)
 	{
 		printf("FileAccess_voidDeleteAllRec: Error opening file.\n");
