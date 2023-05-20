@@ -8,7 +8,7 @@
 ##### 4. View all records
 ##### 5. Edit admin password
 ##### 6. Edit student grade 
-#### 1-Student mode and have these privileges
+#### 2-Student mode and have these privileges
 ##### 1. View your record. 
 ##### 2. Edit your password. 
 ##### 3. Edit your name
