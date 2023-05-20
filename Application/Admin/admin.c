@@ -128,7 +128,7 @@ void AADM_vRemoveStudent(Student *ptr_aStudents[],int *ptr_nNum)
     {
         printf("ID dosen't exist\n");
         printf("Enter id or Enter 1 to exit\n");
-        scanf("%d",loc_nId);
+        scanf("%d",&loc_nId);
         if(loc_nId==1)
         {
             return;
@@ -197,18 +197,48 @@ void AADM_vEditAdminPass()
 void AADM_vEditStudentGrade(Student *ptr_aStudents[],int cpy_nNum)
 {
     int loc_nId;
+    int loc_nBool=0;
     printf("Enter student id\n");
     scanf("%d",&loc_nId);
     for(int i=0;i<cpy_nNum;i++)
     {
         if((*ptr_aStudents)[i].id==loc_nId)
         {
-             float loc_fGrade;
-             printf("Enter new grade\n");
-             scanf("%f",&loc_fGrade);
-             DDMN_vEditStudentGrade(ptr_aStudents,loc_fGrade,loc_nId,cpy_nNum);
-             return;
+            loc_nBool=1;
+            break;
         }
     }
-    printf("Application:Wrong id\n");
+    while(loc_nBool==0)
+    {
+        printf("ID dosen't exist\n");
+        printf("Enter id or Enter 1 to exit\n");
+        scanf("%d",&loc_nId);
+        if(loc_nId==1)
+        {
+            return;
+        }
+        for(int i=0;i<cpy_nNum;i++)
+        {
+            if((*ptr_aStudents)[i].id==loc_nId)
+            {
+                loc_nBool=1;
+                break;
+            }
+        }
+    }
+    float loc_fGrade;
+    printf("Enter new grade\n");
+    scanf("%f",&loc_fGrade);
+    while(loc_fGrade>100||loc_fGrade<0)
+    {
+        printf("Grade must be between 0 and 100\n");
+        printf("Enter new Grade or Enter -1 for exit\n");
+        scanf("%f",&loc_fGrade);
+        if(loc_fGrade==-1)
+        {
+            return;
+        }
+    }
+    DDMN_vEditStudentGrade(ptr_aStudents,loc_fGrade,loc_nId,cpy_nNum);
+    return;
 }

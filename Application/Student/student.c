@@ -20,8 +20,35 @@
 void ASTU_vViewRecord(Student *ptr_aStudents[],int cpy_nNum)
 {
     int loc_nId=0;
+    int loc_nBool=0;
     printf("Enter Your ID\n");
     scanf("%d",&loc_nId);
+    for(int i=0;i<cpy_nNum;i++)
+    {
+        if((*ptr_aStudents)[i].id==loc_nId)
+        {
+            loc_nBool=1;
+            break;
+        }
+    }
+    while(loc_nBool==0)
+    {
+        printf("ID dosen't exist\n");
+        printf("Enter id or Enter 1 to exit\n");
+        scanf("%d",&loc_nId);
+        if(loc_nId==1)
+        {
+            return;
+        }
+        for(int i=0;i<cpy_nNum;i++)
+        {
+            if((*ptr_aStudents)[i].id==loc_nId)
+            {
+                loc_nBool=1;
+                break;
+            }
+        }
+    }
     DDMN_vViewStudentRecord(ptr_aStudents,loc_nId,cpy_nNum);
 }
 
@@ -33,9 +60,35 @@ void ASTU_vViewRecord(Student *ptr_aStudents[],int cpy_nNum)
 void ASTU_vEditPass(Student *ptr_aStudents[],int cpy_nNum)
 {
     int loc_nId=0;
+    int loc_nBool=0;
     printf("Enter Your ID\n");
     scanf("%d",&loc_nId);
-    //Authentication
+    for(int i=0;i<cpy_nNum;i++)
+    {
+        if((*ptr_aStudents)[i].id==loc_nId)
+        {
+            loc_nBool=1;
+            break;
+        }
+    }
+    while(loc_nBool==0)
+    {
+        printf("ID dosen't exist\n");
+        printf("Enter id or Enter 1 to exit\n");
+        scanf("%d",&loc_nId);
+        if(loc_nId==1)
+        {
+            return;
+        }
+        for(int i=0;i<cpy_nNum;i++)
+        {
+            if((*ptr_aStudents)[i].id==loc_nId)
+            {
+                loc_nBool=1;
+                break;
+            }
+        }
+    }
     char*loc_pPass;
     char*loc_pTemp;
     DMMN_vAllocateSudentName(&loc_pPass);
@@ -65,6 +118,33 @@ void ASTU_vEditName(Student *ptr_aStudents[],int cpy_nNum)
     int loc_nId=0;
     printf("Enter Your ID\n");
     scanf("%d",&loc_nId);
+    int loc_nBool=0;
+    for(int i=0;i<cpy_nNum;i++)
+    {
+        if((*ptr_aStudents)[i].id==loc_nId)
+        {
+            loc_nBool=1;
+            break;
+        }
+    }
+    while(loc_nBool==0)
+    {
+        printf("ID dosen't exist\n");
+        printf("Enter id or Enter 1 to exit\n");
+        scanf("%d",&loc_nId);
+        if(loc_nId==1)
+        {
+            return;
+        }
+        for(int i=0;i<cpy_nNum;i++)
+        {
+            if((*ptr_aStudents)[i].id==loc_nId)
+            {
+                loc_nBool=1;
+                break;
+            }
+        }
+    }
     //Authentication
     char*loc_pTemp;
     char*loc_pName;
