@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "menu_interface.h": "c",
+        "authentication_interface.h": "c",
+        "student_struct.h": "c",
+        "output_interface.h": "c"
+    }
+}

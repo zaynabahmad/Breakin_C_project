@@ -131,7 +131,7 @@ void ASTU_vEditName(Student *ptr_aStudents[],int cpy_nNum)
     {
         printf("ID dosen't exist\n");
         printf("Enter id or Enter 1 to exit\n");
-        scanf("%d",&loc_nId);
+        scanf(" %d",&loc_nId);
         if(loc_nId==1)
         {
             return;
