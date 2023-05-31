@@ -11,7 +11,7 @@
 #include"UserInterface/IO/Output_interface.h"
 #include"UserInterface/Menu/Menu_interface.h"
 #include"Application/Authentication/Authentication_interface.h"
-
+#include <conio.h>
 int main()
 {
     /*Open the file*/
@@ -35,6 +35,7 @@ int main()
 
     while(1)
     {
+        Output_ClrScr();
         /*Update the list loop flag*/
         Local_ListLoop = 1;
 
@@ -48,6 +49,7 @@ int main()
 
             if(Local_LoginState == 1)
             {
+                Output_ClrScr();
                 Menu_GetList(ADMIN_LIST, &Local_MenusPtr);
                 while(Local_ListLoop)
                 {
@@ -55,24 +57,35 @@ int main()
                     switch(Local_ChoiceIndicator)
                     {
                     case 1:
+                        Output_ClrScr();
                         AADM_vAddStudent(&loc_sArr,&loc_nNum);
+                        Output_ClrScr();
                         break;
                     case 2:
+                        Output_ClrScr();
                         AADM_vRemoveStudent(&loc_sArr,&loc_nNum);
+                        Output_ClrScr();
                         break;
                     case 3:
+                        Output_ClrScr();
                         AADM_vViewStudent(&loc_sArr,loc_nNum);
                         break;
                     case 4:
+                        Output_ClrScr();
                         AADM_vViewAllStudent(&loc_sArr,loc_nNum);
                         break;
                     case 5:
+                        Output_ClrScr();
                         AADM_vEditAdminPass();
+                        Output_ClrScr();
                         break;
                     case 6:
+                        Output_ClrScr();
                         AADM_vEditStudentGrade(&loc_sArr,loc_nNum);
+                        Output_ClrScr();
                         break;
                     case 7:
+                        Output_ClrScr();
                         Local_ListLoop = 0;
                         break;
                     default:
@@ -88,6 +101,7 @@ int main()
 
             if(Local_LoginState == 1)
             {
+                Output_ClrScr();
                 Menu_GetList(STUDENT_LIST, &Local_MenusPtr);
                 while(Local_ListLoop)
                 {
@@ -95,15 +109,21 @@ int main()
                     switch(Local_ChoiceIndicator)
                     {
                     case 1:
+                        Output_ClrScr();
                         ASTU_vViewRecord(&loc_sArr,loc_nNum);
                         break;
                     case 2:
+                        Output_ClrScr();
                         ASTU_vEditPass(&loc_sArr,loc_nNum);
+                        Output_ClrScr();
                         break;
                     case 3:
+                        Output_ClrScr();
                         ASTU_vEditName(&loc_sArr,loc_nNum);
+                        Output_ClrScr();
                         break;
-                    case 4: 
+                    case 4:
+                        Output_ClrScr();
                         Local_ListLoop = 0;
                         break;
                     default:
@@ -117,7 +137,7 @@ int main()
         {
             break;
         }
-        
+
     }
 
     /*Close the file and save the new data*/

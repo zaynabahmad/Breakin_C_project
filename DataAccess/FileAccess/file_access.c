@@ -76,7 +76,7 @@ int DFIL_nReadStudentRec(Student**ptr_aStudent)
 
 	int cpy_nSize=0;
 
-	while(!feof(loc_ptr_file))
+	do
     {
 		int num = 0;
 
@@ -111,7 +111,7 @@ int DFIL_nReadStudentRec(Student**ptr_aStudent)
         DMMN_vAllocateStudentMemory(ptr_aStudent,cpy_nSize);
 		*(*(ptr_aStudent)+cpy_nSize)=Loc_cpy_sStudentTemp;
 		cpy_nSize++;
-    }
+    }while(!feof(loc_ptr_file));
     fclose(loc_ptr_file);
     return cpy_nSize;
 }

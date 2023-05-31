@@ -9,8 +9,9 @@
  *
  * @return char         Error State.
  */
-char Output_PrintList(const char **Arg_ListPtr, int Arg_ListSize);
+char Output_PrintList(char **Arg_ListPtr, int Arg_ListSize);
 
 void Output_PrintWrongInput(char Arg_RemainAttempts);
 
+void Output_ClrScr();
 #endif

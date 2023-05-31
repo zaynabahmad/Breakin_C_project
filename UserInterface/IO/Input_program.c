@@ -1,7 +1,5 @@
 #include "stdio.h"
-
 #include "../../Error_Handling.h"
-
 #include "../../DataAccess/student_struct.h"
 #include "Input_interface.h"
 #include "Output_interface.h"
@@ -67,18 +65,18 @@ char Input_ScanLoginData(char Arg_UserType, int *Arg_LoginState)
 
             switch(Arg_UserType)
             {
-            case INPUT_ADMIN_TYPE: 
+            case INPUT_ADMIN_TYPE:
                 printf("Login:\n");
                 printf("Admin Password: ");
                 scanf("%49s", Local_Password);
 
                 /*Authonticate Admin Password*/
                 Authent_ValidateAdminData(Local_Password, &Local_LoginState);
-                                
+
                 *Arg_LoginState = Local_LoginState;
                 break;
 
-            case INPUT_STUDENT_TYPE: 
+            case INPUT_STUDENT_TYPE:
                 printf("\nLogin:\n");
                 printf("ID: ");
                 scanf("%d", &Local_StudentID);
@@ -102,11 +100,11 @@ char Input_ScanLoginData(char Arg_UserType, int *Arg_LoginState)
             }
         }
     }
-    else 
+    else
     {
         Local_ErrorState = NULL_POINTER_ERR;
     }
-    
+
     return Local_ErrorState;
 }
 
@@ -138,7 +136,7 @@ char Input_ScanStudentLoginData(Student *Arg_StudentArr[], int Arg_StudentsNum, 
                 /*Authonticate Student Username and Password*/
                 Local_LoginState = Authent_ValidateStudentData(Arg_StudentArr, Local_StudentID, Local_Password, Arg_StudentsNum);
                 *Arg_LoginState = Local_LoginState;
-                
+
             /*Validate the number*/
             if(Local_LoginState == 1)
             {
@@ -150,10 +148,10 @@ char Input_ScanStudentLoginData(Student *Arg_StudentArr[], int Arg_StudentsNum, 
             }
         }
     }
-    else 
+    else
     {
         Local_ErrorState = NULL_POINTER_ERR;
     }
-    
+
     return Local_ErrorState;
 }

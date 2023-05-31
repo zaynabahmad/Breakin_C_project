@@ -2,6 +2,7 @@
 #include "Authentication_interface.h"
 #include "../../DataAccess/student_struct.h"
 #include "../../DataAccess/MemoryManagement/memory_management.h"
+#include"../../DataAccess/FileAccess/file_access.h"
 #include "string.h"
 
 void Authent_ValidateAdminData(char *Arg_Password, int *Arg_LoginState)
@@ -69,7 +70,7 @@ int Authent_ValidateStudentData(Student *Arg_StudentArr[], int Arg_ID, char *Arg
 
     for(Local_Iterator = 0; Local_Iterator < Arg_StudentsNum; Local_Iterator++)
     {
-        if((*Arg_StudentArr)[Local_Iterator].id == Arg_ID) 
+        if((*Arg_StudentArr)[Local_Iterator].id == Arg_ID)
         {
             Local_InputedIDNum = Local_Iterator;
             /*Find the length of the password*/
@@ -111,6 +112,6 @@ int Authent_ValidateStudentData(Student *Arg_StudentArr[], int Arg_ID, char *Arg
             }
         }
     }
-    
+
     return Local_State;
 }

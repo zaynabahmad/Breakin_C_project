@@ -3,8 +3,11 @@
 
 #include "Output_interface.h"
 
-
-char Output_PrintList(const char **Arg_ListPtr, int Arg_ListSize)
+void Output_ClrScr()
+{
+    system("@cls||clear");
+}
+char Output_PrintList(char **Arg_ListPtr, int Arg_ListSize)
 {
     /*Define Variables*/
     char Local_ErrorState = OK;
